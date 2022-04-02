@@ -3,14 +3,14 @@
 In this project, you can add books in SQLite and you can see them using APIs. 
 
 Technologies which are used:
-    -   SQLite
-    -   GORM (SQLite Database Driver)
-    -   Fiber (For APIs)
+-   SQLite
+-   GORM (SQLite Database Driver)
+-   Fiber (For APIs)
 
 We have 3 operations:
-    - GET
-    - POST
-    - DELETE
+- GET
+- POST
+- DELETE
 
 ## Usage
 
