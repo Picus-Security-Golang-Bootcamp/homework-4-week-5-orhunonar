@@ -7,14 +7,14 @@ import (
 	"gorm.io/gorm"
 )
 
-func Getbooks(c *fiber.Ctx) {
+func Getbooks(c *fiber.Ctx) { // Get all books
 	db := database.DBConn
 	var books []Book
 	db.Find(&books)
 	c.JSON(books)
 }
 
-func Getbook(c *fiber.Ctx) {
+func Getbook(c *fiber.Ctx) { // Get book with id
 	id := c.Params("id")
 	db := database.DBConn
 	var book Book
@@ -23,7 +23,7 @@ func Getbook(c *fiber.Ctx) {
 
 }
 
-func Newbook(c *fiber.Ctx) {
+func Newbooks(c *fiber.Ctx) { // Add spesific books
 	listofbooks := []Book{
 		{
 			Title:      "The Lord of the Rings",
@@ -55,7 +55,7 @@ func Newbook(c *fiber.Ctx) {
 
 }
 
-func Deletebook(c *fiber.Ctx) {
+func Deletebook(c *fiber.Ctx) { //Delete book whic id is given
 	id := c.Params("id")
 	db := database.DBConn
 
@@ -67,6 +67,19 @@ func Deletebook(c *fiber.Ctx) {
 	}
 	db.Delete(&book)
 	c.Send("Book Successfully deleted")
+}
+func InsertBook(c *fiber.Ctx) { // Add custom books
+	var book Book
+	err := c.BodyParser(&book)
+	if err != nil {
+		c.Status(500).Send("Error in parsing the body")
+		return
+	}
+
+	db := database.DBConn
+	db.Create(&book)
+	c.Send("Book Successfully created")
+	c.JSON(book)
 }
 
 type Book struct {

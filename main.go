@@ -27,16 +27,18 @@ func main() {
 
 }
 
-func Hello(c *fiber.Ctx) {
-	c.Send("Hello World!")
+func Greeting(c *fiber.Ctx) {
+	c.Send("Welcome to the Book Store")
 }
 func setupRoutes(app *fiber.App) {
-	app.Get("/", Hello)
+	app.Get("/", Greeting)
 
-	app.Get("/api/v1/book", book.Getbooks)
-	app.Get("/api/v1/book/:id", book.Getbook)
-	app.Post("/api/v1/book", book.Newbook)
-	app.Delete("/api/v1/book/:id", book.Deletebook)
+	app.Get("/book", book.Getbooks)
+	app.Get("/book/:id", book.Getbook)
+	app.Post("/book", book.Newbooks)
+	app.Post("/books", book.InsertBook)
+	app.Get("/books", book.Getbooks)
+	app.Delete("/book/:id", book.Deletebook)
 
 }
 func initDatabase() {
